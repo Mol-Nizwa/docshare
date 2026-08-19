@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>لوحة إدارة الباركود - One Time QR</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Tahoma, Arial, sans-serif; background: #f3f6fb; color: #172033; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 16px; }
+    .card { background: #fff; border-radius: 20px; padding: 26px; box-shadow: 0 10px 30px rgba(23, 32, 51, 0.08); margin-bottom: 18px; }
+    h1 { margin-top: 0; font-size: 28px; color: #1456d9; }
+    h2 { font-size: 21px; margin-top: 0; }
+    .muted { color: #667085; }
+    .admin-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .qr { display: block; width: min(360px, 100%); margin: 20px auto; border: 1px solid #eaecf0; border-radius: 16px; padding: 10px; }
+    input[type=file] { width: 100%; padding: 15px; border: 1px solid #d0d5dd; border-radius: 12px; margin: 15px 0; background: #fafafa; }
+    .button { display: inline-block; border: 0; border-radius: 12px; padding: 13px 18px; background: #1456d9; color: white; text-decoration: none; cursor: pointer; font-size: 15px; font-weight: bold; width: 100%; text-align: center; }
+    .button.secondary { background: #eef4ff; color: #1456d9; width: auto; }
+    .button:hover { opacity: 0.9; }
+    .status { margin-top: 18px; padding: 14px; background: #f7f9fc; border-radius: 12px; border-right: 4px solid #1456d9; }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+    th, td { padding: 12px 14px; border-bottom: 1px solid #eee; text-align: right; white-space: nowrap; }
+    th { background: #f8fafc; color: #475467; font-weight: 600; }
+    code { background: #f0f2f5; padding: 4px 8px; border-radius: 6px; direction: ltr; display: inline-block; font-family: monospace; }
+    @media (max-width: 750px) {
+      .admin-grid { grid-template-columns: 1fr; }
+      .card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="admin-grid">
+      <!-- قسم QR الثابت -->
+      <section class="card">
+        <h1>الباركود الثابت</h1>
+        <p class="muted">الرابط لا يتغير: <code id="baseUrl">http://localhost:3001/q</code></p>
+        <img class="qr" src="/admin/qr.png" alt="QR Code" id="qrImage">
+        <div style="text-align: center;">
+          <a class="button secondary" href="/admin/qr.png" download="qr.png">تحميل QR كصورة</a>
+        </div>
+      </section>
+      <!-- قسم رفع مرفق جديد -->
+      <section class="card">
+        <h1>رفع مرفق جديد</h1>
+        <p class="muted">رفع ملف جديد يعيد تفعيل نفس الباركود تلقائيًا لمستخدم واحد فقط.</p>
+        <form action="/admin/upload" method="post" enctype="multipart/form-data">
+          <input type="file" name="attachment" required>
+          <button class="button" type="submit">رفع وتفعيل المرفق</button>

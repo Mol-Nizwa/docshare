@@ -1,0 +1,16 @@
+{
+  "name": "one-time-qr-attachment",
+  "version": "1.0.0",
+  "description": "Static QR code with one-time attachment access and 5-minute viewing window.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "qrcode": "^1.5.4",
+    "sqlite3": "^5.1.7"
+  }
+}
